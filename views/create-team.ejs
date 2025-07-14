@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Your Team</title>
+  <link rel="stylesheet" href="/stylesheets/team.css">
+</head>
+<body>
+  <h2>🛠️ Create team for <%= match.teamA %> vs <%= match.teamB %></h2>
+
+  <div class="player-grid">
+    <% match.players.forEach(player => { %>
+      <div class="player-card">
+        <img src="/images/players/<%= player.name.toLowerCase().replace(/\s+/g, '-') %>.png" alt="<%= player.name %>" />
+        <h4><%= player.name %></h4>
+        <p><%= player.team %> - <%= player.role %></p>
+        <p>Credits: <%= player.credits %></p>
+        <input type="checkbox" name="team[]" value="<%= player.name %>"> Select
+      </div>
+    <% }) %>
+  </div>
+
+  <button type="submit">Submit Team ✅</button>
+</body>
+</html>

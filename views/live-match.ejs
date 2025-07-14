@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= match.teamA %> vs <%= match.teamB %> | Live</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <div class="main-content">
+   <h2><%= match.teamA %> vs <%= match.teamB %></h2>
+<p>Status: <%= liveData.status %></p>
+
+<% if (liveData.scoreboards && liveData.scoreboards.length > 0) { %>
+  <% liveData.scoreboards.forEach(sb => { %>
+    <p><%= sb.inning %> → <%= sb.total %>/<%= sb.wickets %> (<%= sb.overs %> ov)</p>
+  <% }) %>
+<% } else { %>
+  <p>Live score not available yet.</p>
+<% } %>
+
+<a href="/team/create/<%= match._id %>">⚙️ Create Team</a>
+
+      <h3>🏏 Scoreboard</h3>
+      <% match.scoreboards.forEach(sb => { %>
+        <div class="score-info">
+          <p><strong><%= sb.inning %>:</strong> <%= sb.score %>/<%= sb.wickets %> (<%= sb.overs %> ov)</p>
+        </div>
+      <% }) %>
+    <% } %>
+
+    <% if (match.balls && match.balls.length > 0) { %>
+      <h3>⚾ Ball by Ball</h3>
+      <% match.balls.slice(-6).reverse().forEach(ball => { %>
+        <p><%= ball.over %>.<%= ball.ball %> — <%= ball.result %> — <%= ball.batsman.name %> vs <%= ball.bowler.name %></p>
+      <% }) %>
+    <% } %>
+
+    <a href="/">⬅️ Back</a>
+  </div>
+</body>
+</html>

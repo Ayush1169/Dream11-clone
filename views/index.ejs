@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+<body>
+  <% if (user) { %>
+  <div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Welcome, <%= user.username %> 👋</h2>
+      <p>💰 Wallet: ₹<%= user.wallet %></p>
+
+      <a href="/profile">🧍 My Profile</a>
+      <a href="/transaction/deposit">💸 Deposit</a>
+      <a href="/transaction/withdraw">🏦 Withdraw</a>
+
+      <% if (user.role === 'admin') { %>
+        <a href="/add"> ➕ Add Match</a>
+        <form action="/seed/live" method="get" style="margin-top: 10px;">
+          <button type="submit" style="background: #00c8ff; padding: 6px 10px; border: none; border-radius: 5px; color: white; cursor: pointer;">
+            🔁 Add Live Matches
+          </button>
+        </form>
+      <% } %>
+
+      <a href="/logout">🚪 Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+      <!-- ✅ Live Matches -->
+      <% if (liveMatches && liveMatches.length > 0) { %>
+        <h2>🔥 Live Matches</h2>
+        <% liveMatches.forEach(match => { %>
+          <div class="match-card live">
+            <strong><%= match.teamA %> vs <%= match.teamB %></strong><br/>
+            <span>🟢 Live | Started: <%= new Date(match.startTime).toLocaleString() %></span><br/>
+
+            <% if (match.scoreboard && match.scoreboard.length > 0) { %>
+              <div class="score-info">
+                <% match.scoreboard.forEach(sb => { %>
+                  <p><%= sb.inning %>: <%= sb.score %>/<%= sb.wickets %> (<%= sb.overs %> ov)</p>
+                <% }) %>
+              </div>
+            <% } %>
+
+            <a href="/match/live/<%= match._id || match.id %>">🔴 Watch Live</a>
+            <a href="/team/create/<%= match._id || match.id %>">⚙️ Create Team</a>
+          </div>
+        <% }) %>
+        <hr />
+      <% } %>
+
+      <!-- ✅ Upcoming Matches -->
+      <h2>🏏 Upcoming Matches</h2>
+      <% if (upcomingMatches && upcomingMatches.length === 0) { %>
+        <p>No upcoming matches.</p>
+      <% } else { %>
+        <% upcomingMatches.forEach(match => { %>
+          <div class="match-card">
+            <strong><%= match.teamA %> vs <%= match.teamB %></strong><br/>
+            <span>🕒 <%= new Date(match.startTime).toLocaleString() %></span><br/>
+            <a href="/team/create/<%= match._id %>">⚙️ Create Team</a>
+          </div>
+        <% }) %>
+        <hr />
+      <% } %>
+
+      <!-- ✅ Completed Matches -->
+      <h2>✅ Completed Matches</h2>
+      <% if (completedMatches && completedMatches.length === 0) { %>
+        <p>No recently completed matches.</p>
+      <% } else { %>
+        <% completedMatches.forEach(match => { %>
+          <div class="match-card completed">
+            <strong><%= match.teamA %> vs <%= match.teamB %></strong><br/>
+            <span>✅ Completed at: <%= new Date(match.endTime).toLocaleString() %></span>
+          </div>
+        <% }) %>
+      <% } %>
+
+    </div>
+  </div>
+
+  <% } else { %>
+    <div class="main-content">
+      <h1>🏆 Welcome to Dream11 Clone</h1>
+      <a href="/login">Login</a> | <a href="/register">Register</a>
+    </div>
+  <% } %>
+</body>
+</html>

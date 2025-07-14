@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Match</title>
+  <link rel="stylesheet" href="/stylesheets/addmatch.css">
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>➕ Add New Match</h2>
+
+    <form action="/add" method="POST">
+      <label for="teamA">Team A</label>
+      <input type="text" name="teamA" id="teamA" required>
+
+      <label for="teamB">Team B</label>
+      <input type="text" name="teamB" id="teamB" required>
+
+      <label for="startTime">Start Time</label>
+      <input type="datetime-local" name="startTime" id="startTime" required>
+
+      <label for="endTime">End Time</label>
+      <input type="datetime-local" name="endTime" id="endTime" required>
+
+      <!-- 🟢 Match Status Dropdown -->
+      <label for="status">Match Status</label>
+      <select name="status" id="status">
+        <option value="upcoming">Upcoming</option>
+        <option value="live">Live</option>
+        <option value="completed">Completed</option>
+      </select>
+
+      <input type="submit" value="Add Match">
+    </form>
+
+    <a href="/" class="back-link">← Go Back to Home</a>
+  </div>
+
+</body>
+</html>

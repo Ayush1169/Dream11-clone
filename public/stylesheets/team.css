@@ -1,0 +1,81 @@
+/* 📁 public/stylesheets/team.css */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #161616, #1f1f1f);
+  color: #fff;
+  padding: 2rem;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #0ef;
+}
+
+.player-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+  padding: 0 2rem;
+}
+
+.player-card {
+  background-color: #262626;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.player-card:hover {
+  transform: scale(1.05);
+}
+
+.player-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 2px solid #0ef;
+}
+
+.player-card h4 {
+  margin: 0.3rem 0;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.player-card p {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin: 0.2rem 0;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+  margin-top: 0.5rem;
+  accent-color: #0ef;
+}
+
+button[type="submit"] {
+  display: block;
+  margin: 2rem auto;
+  padding: 0.8rem 2rem;
+  background-color: #0ef;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #00c4cc;
+}
